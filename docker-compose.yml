@@ -1,0 +1,12 @@
+# Adapted from example in docker documentation
+# Link all containers together in here
+version: '3'
+
+services:
+  web:
+    build: .
+    volumes:
+       - .:/code
+    ports:
+       - 8000:8000
+    command: python /code/mysite/manage.py runserver 0.0.0.0:8000
