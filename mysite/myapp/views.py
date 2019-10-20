@@ -4,9 +4,26 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from . import models
+from . import forms
 
-# Create your views here.
+# Default home page
 def index(request):
-    return render("base.html")
+    context = {
+        "title":"Home",
+    }
+    return render(request, "index.html", context=context)
 
 # Register view
+def register(request):
+    if request.method == "POST":
+        RF_instance = forms.RegistrationForm(request.POST)
+        if RF_instance.is_valid():
+            RF_instance.save()
+            return redirect("/login/")
+    else:
+        RF_instance = forms.RegistrationForm()
+    context = {
+        "registration_form":RF_instance,
+    }
+    return render(request,"registration/register.html",context=context)
