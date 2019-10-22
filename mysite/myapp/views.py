@@ -10,9 +10,9 @@ from . import forms
 # Default home page
 def index(request):
     context = {
-        "title":"Home",
+        "title":"Welcome to WhiteBoard",
     }
-    return render(request, "index.html", context=context)
+    return render(request,"index.html", context = context)
 
 # Register view
 def register(request):
@@ -26,4 +26,12 @@ def register(request):
     context = {
         "registration_form":RF_instance,
     }
-    return render(request,"registration/register.html",context=context)
+    return render(request,"registration/register.html",context = context)
+
+# Logout View
+def logout_view(request):
+    #logout(request)
+    context = {
+        "title":"Logout",
+    }
+    return render(request,"registration/logout.html",context = context)
