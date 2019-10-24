@@ -35,3 +35,5 @@ def logout_view(request):
         "title":"Logout",
     }
     return render(request,"registration/logout.html",context = context)
+
+# Live Chat View - Django Channels
