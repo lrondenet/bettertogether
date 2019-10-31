@@ -1,25 +1,57 @@
-h1 {
-    margin: 0;
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
 body {
     background-color: rgb(107, 173, 226); 
 }
-.navbar {
-    background-color: rgb(255, 247, 175);
-    padding: 10px;
+
+nav {
+    display: flex; 
+    justify-content: space-around;
+    background-color: coral;
+    font-family: 'Josefin Sans', sans-serif;
+    align-items: center;
 }
 
-.button {
-    background-color: rgb(51, 68, 124);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    position: relative; left: 910px;
-  }
+.logo {
+    color: rgb(247, 243, 231);
+    letter-spacing: 5px;
+}
+
+.navbar-button li {
+    list-style: none;
+    display: inline-block; 
+    height: 42px;
+    padding: 12px; 
+}
+
+.navbar-button a {
+    background-color: rgb(107, 173, 226); 
+    color: rgb(247, 243, 231);
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+img {
+    position: relative;
+    bottom: 35px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+body .intro {
+    position: relative;
+    bottom: 120px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: rgb(247, 243, 231);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    font-size: 24px;
+}

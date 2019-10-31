@@ -1,13 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-*** ERASE WHEN STYLING ***
-bettertogether home page ready for styling.
-Login/logout/register pages are not set up yet.
-But you can set up the button for those and just input the link when ready.
-jfbfifiirbfbfuefeubdk
-<div class="navbar">
-        <a href="#" class="button">Login</a>
-        <a href="#" class="button">Signup</a>
+{% load static %}
+<html lang="en>">
+<head>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <h4>bettertogether</h4>
+        </div>
+        <div class="navbar-button">
+            <ul>
+                <li><a href="#" class="button">Login</a></li>
+                <li><a href="#" class="button">Signup</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        <img src="{% static 'img/logo.jpg' %}" alt="logo"/>
+        <span style="vertical-align: middle;"> bettertogether is an online whiteboard that is designed 
+            to help students collaborate on projects and homework.
+            bettertogether will allowed students to chat with each other
+            and work together.</span>
     </div>
+    <div class="intro">
+        <p>
+            bettertogether is an online whiteboard that is designed 
+            to help students collaborate on projects and homework.
+            bettertogether will allowed students to chat with each other
+            and work together.
+        </p>
+    </div>
+</body>
+</html>
 {% endblock %}
