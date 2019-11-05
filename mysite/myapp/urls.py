@@ -12,3 +12,4 @@ urlpatterns = [
     path('logout/', views.logout_view),
     path('newwhiteboard/', views.create_whiteboard),
 ]
+
