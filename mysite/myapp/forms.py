@@ -17,3 +17,11 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+# Create Whiteboard Form
+class WhiteboardForm(UserCreationForm):
+    subject = forms.CharField(label='Subject', max_length=30)
+    # If checked, the whiteboard is open to the public
+    public = forms.BooleanField(initial=True)
+    if public == True:
+        privatekey = forms.IntegerField(label='WhiteboardPassword')

@@ -28,6 +28,14 @@ def register(request):
     }
     return render(request,"registration/register.html",context = context)
 
+# New Whiteboard View
+def create_whiteboard(request):
+    WF_instance = forms.WhiteboardForm()
+    context = {
+        "whiteboard_form":WF_instance,
+    }
+    return render(request,"whiteboard/whiteboardform.html",context = context)
+
 # Logout View
 def logout_view(request):
     #logout(request)
