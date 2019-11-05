@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+  <form action="/register/" method="post">
+    <h4>Create an Account</h4>
+      {% csrf_token %}
+        {{ registration_form.errors }}
+        {{ registration_form.username.label_tag }}
+        {{ registration_form.username }}
+        {{ registration_form.email.label_tag }}
+        {{ registration_form.email }}
+        {{ registration_form.password1.label_tag }}
+        {{ registration_form.password1 }}
+        {{ registration_form.password2.label_tag }}
+        {{ registration_form.password2 }}
+        <input type="submit" value="Register" />
+  </form>
+</div>
+{% endblock %}
