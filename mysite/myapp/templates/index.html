@@ -3,8 +3,10 @@
 {% block content %}
 {% load static %}
 <html lang="en>">
+
 <head>
 </head>
+
 <body>
     <nav>
         <div class="logo">
@@ -13,25 +15,15 @@
         <div class="navbar-button">
             <ul>
                 <li><a href="#" class="button">Login</a></li>
-                <li><a href="#" class="button">Signup</a></li>
             </ul>
         </div>
     </nav>
-    <div>
-        <img src="{% static 'img/logo.jpg' %}" alt="logo"/>
-        <span style="vertical-align: middle;"> bettertogether is an online whiteboard that is designed 
-            to help students collaborate on projects and homework.
-            bettertogether will allowed students to chat with each other
-            and work together.</span>
-    </div>
-    <div class="intro">
-        <p>
-            bettertogether is an online whiteboard that is designed 
-            to help students collaborate on projects and homework.
-            bettertogether will allowed students to chat with each other
-            and work together.
-        </p>
+    <div class="box">
+        <img src="{% static 'img/logo.jpg' %}" alt="logo" />
+        <p>Create ∙ Innovate • Collaborate</p>
+        <a class="button" href="#">Signup Here</a>
     </div>
 </body>
+
 </html>
 {% endblock %}
