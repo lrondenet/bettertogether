@@ -74,11 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# Django Channels
-# https://channels.readthedocs.io/en/latest/installation.html
-
-ASGI_APPLICATION = "mysite.routing.application"
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -127,3 +122,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Django Channels
+# https://channels.readthedocs.io/en/latest/installation.html
+
+ASGI_APPLICATION = "mysite.routing.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+            #"hosts": [('redis', 6379)],
+        },
+    },
+}
