@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 
 # User Registration Form
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(label = "Email",required=True)
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Username"}))
+    email = forms.EmailField(label = "Email", widget=forms.TextInput(attrs={"placeholder": "Email"}), required=True)
+    password1 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Password"}))
+    password2 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Password Confirmation"}))
 
     class Meta:
         model = User
