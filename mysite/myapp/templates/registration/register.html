@@ -1,20 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-  <form action="/register/" method="post">
-    <h4>Create an Account</h4>
+  <form class="form" action="/register/" method="post">
+    <div class="container">
+      <h4>Create an Account</h4>
       {% csrf_token %}
-        {{ registration_form.errors }}
-        {{ registration_form.username.label_tag }}
-        {{ registration_form.username }}
-        {{ registration_form.email.label_tag }}
-        {{ registration_form.email }}
-        {{ registration_form.password1.label_tag }}
-        {{ registration_form.password1 }}
-        {{ registration_form.password2.label_tag }}
-        {{ registration_form.password2 }}
-        <input type="submit" value="Register" />
-  </form>
-</div>
+      {{ registration_form.errors }}
+      <p>{{registration_form.username }}</p>
+      <p>{{ registration_form.email }}</p>
+      <p>{{ registration_form.password1 }}</p>
+      <p>{{ registration_form.password2 }}</p>
+      <button class="button">Register</button>
+    </div>
+</form>
 {% endblock %}
