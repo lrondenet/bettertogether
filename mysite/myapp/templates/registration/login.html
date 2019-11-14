@@ -12,7 +12,10 @@
         {{ form.password.label_tag }}
         {{ form.password }}
       </div>
-      <button type="button" class="button">Submit</button>
+      <input type="submit"/>
+        <a href="/register/">Register</a>
+      <input type="hidden" name="next" value="{{ request.GET.next }}" />
+      <!-- <button type="button" class="button">Submit</button> -->
   </form>
 </div>
 {% endblock %}

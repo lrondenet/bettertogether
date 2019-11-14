@@ -30,7 +30,12 @@ def register(request):
 
 # New Whiteboard View
 def create_whiteboard(request):
-    WF_instance = forms.WhiteboardForm()
+    if request.method == "POST":
+        WF_instance = forms.WhiteboardForm(request.POST)
+        if WF_instance.is_valid():
+            WF_instance.save()
+    else:
+        WF_instance = forms.WhiteboardForm()
     context = {
         "whiteboard_form":WF_instance,
     }
@@ -45,3 +50,14 @@ def logout_view(request):
     return render(request,"registration/logout.html",context = context)
 
 # Live Chat View - Django Channels
+
+# Dashboard View
+@csrf_exempt
+@login_required(login_url='/login/')
+def dashboard(request):
+    if 'newwhiteboard' in request.POST:
+        return redirect("/newwhiteboard/")
+    context = {
+        "title":"Dashboard",
+    }
+    return render(request, "whiteboard/dashboard.html", context = context)

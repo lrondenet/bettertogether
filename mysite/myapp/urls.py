@@ -11,5 +11,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view()),
     path('logout/', views.logout_view),
     path('newwhiteboard/', views.create_whiteboard),
+    path('dashboard/', views.dashboard),
 ]
-

@@ -1,2 +1,22 @@
 <!-- Form for users to create a new whiteboard -->
 <!-- Features: private/public, subject -->
+{% extends "base.html" %}
+{% block title %}<Insert Title>{% endblock %}
+
+{% block content %}
+<div>
+  <form class="" action="/" method="post">
+    {% csrf_token %}
+    <!-- Displays any errors when user fills out form -->
+    {{ whiteboard_form.errors }}
+    <!-- Displays the subject's field label -->
+    {{ whiteboard_form.subject.label }}
+    <!-- Displays the subject's field -->
+    {{ whiteboard_form.subject }}
+    <!-- Displays the public/private checkbox label -->
+    {{ whiteboard_form.public.label }}
+    <!-- Displays the public/private checkbox -->
+    {{ whiteboard_form.public }}
+  </form>
+</div>
+{% endblock %}
