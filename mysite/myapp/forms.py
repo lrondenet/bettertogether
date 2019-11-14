@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 
 # User Registration Form
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(label = "Email",required=True)
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Username"}))
+    email = forms.EmailField(label = "Email", widget=forms.TextInput(attrs={"placeholder": "Email"}), required=True)
+    password1 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Password"}))
+    password2 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Password Confirmation"}))
 
     class Meta:
         model = User
@@ -17,3 +20,11 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+# Create Whiteboard Form
+class WhiteboardForm(UserCreationForm):
+    subject = forms.CharField(label='Subject', max_length=30)
+    # If checked, the whiteboard is open to the public
+    public = forms.BooleanField(initial=True)
+    if public == True:
+        privatekey = forms.IntegerField(label='WhiteboardPassword')

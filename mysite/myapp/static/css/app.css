@@ -1,25 +1,193 @@
-h1 {
-    margin: 0;
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
 body {
     background-color: rgb(107, 173, 226); 
-}
-.navbar {
-    background-color: rgb(255, 247, 175);
-    padding: 10px;
+
 }
 
-.button {
-    background-color: rgb(51, 68, 124);
-    border: none;
-    color: white;
-    padding: 15px 32px;
+nav {
+    display: flex; 
+    justify-content: space-around;
+    background-color: coral;
+    font-family: 'Josefin Sans', sans-serif;
+    align-items: center;
+}
+
+.logo {
+    color: rgb(247, 243, 231);
+    letter-spacing: 5px;
+}
+
+.navbar-button li {
+    list-style: none;
+    display: inline-block; 
+    height: 42px;
+    padding: 12px; 
+}
+
+.navbar-button a {
+    background-color: rgb(107, 173, 226); 
+    color: rgb(247, 243, 231);
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+img {
+    position: relative;
+    top: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.box {
+    background-image: url(../img/backgroundpic.jpg);
+    height: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.box p {
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    position: relative; left: 910px;
-  }
+    position: absolute;
+    left: 0;
+    top: 63%;
+    width: 100%;
+    color: orange;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: 19px;
+
+}
+
+.box a {
+    position: relative;
+    bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 19%;
+    background-color: rgb(107, 173, 226); 
+    color: rgb(247, 243, 231);
+    letter-spacing: 2px;
+    padding: 7px;
+    font-weight: bold;
+} 
+
+.grid {
+    margin: 1rem;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 1%;
+}
+
+.column1 {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    background-color: rgb(247, 243, 231);
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.column1 img {
+    position: relative;
+    top: -10px;
+}
+
+.column1 p {
+    margin: 1rem;
+}
+
+.column2 {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    background-color: rgb(247, 243, 231);
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.column2 img {
+    position: relative;
+    top: -5px;
+}
+
+.column2 p {
+    margin:1rem;
+}
+
+.column3 {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background-color: rgb(247, 243, 231);
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.column3 img {
+    position: relative;
+    top: -20px;
+}
+
+.column4 {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    background-color: rgb(247, 243, 231);
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.column4 img {
+    position: relative;
+    top: -10px; 
+}
+
+.column4 p {
+    margin:1rem;
+}
+
+.loginpage h4 {
+    text-align:center;
+    font-family: 'Josefin Sans', sans-serif;
+    color: rgb(247, 243, 231);
+    margin: 1rem;
+}
+
+
+.container {
+    position: relative;
+    top: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: rgb(247, 243, 231);
+    padding: 20px;
+    display:inline-block;
+}
+
+.container p {
+    width:300px;
+}
+
+.container h4 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    margin: 1rem;
+    font-size: 20pt;
+}
+
+button {
+    font-weight: bold;
+    width:300px;
+}
+
+.form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    position: relative;
+
+}
+
