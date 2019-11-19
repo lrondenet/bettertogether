@@ -32,13 +32,20 @@ def register(request):
 # New Whiteboard View
 def create_whiteboard(request):
     if request.method == "POST":
-        WF_instance = forms.WhiteboardForm(request.POST)
-        if WF_instance.is_valid():
-            WF_instance.save()
+        # Server side validation of the user
+        if request.user.is_authenticated:
+            WF_instance = forms.WhiteboardForm(request.POST)
+            if WF_instance.is_valid():
+                new_whiteboard = models.WhiteBoard(subject=WF_instance.cleaned_data["subject"])
+                new_whiteboard.user = request.user
+                new_whiteboard.save()
+                WF_instance = forms.WhiteboardForm()
     else:
         WF_instance = forms.WhiteboardForm()
+    whiteboard_value = models.WhiteBoard.objects.all()
     context = {
         "whiteboard_form":WF_instance,
+        "whiteboard_value":whiteboard_value,
     }
     return render(request,"whiteboard/whiteboardform.html",context = context)
 
