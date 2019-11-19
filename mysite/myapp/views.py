@@ -48,16 +48,22 @@ def logout_view(request):
     context = {
         "title":"Logout",
     }
-    return render(request,"registration/logout.html",context = context)
+    return redirect("/login/")
+    #return render(request,"registration/logout.html",context = context)
 
 # Live Chat View - Django Channels
+
+# Profile View
+def profile(request):
+    context = {
+        "title":"Profile",
+    }
+    return render(request, "profile.html", context = context)
 
 # Dashboard View
 @csrf_exempt
 @login_required(login_url='/login/')
 def dashboard(request):
-    if 'newwhiteboard' in request.POST:
-        return redirect("/newwhiteboard/")
     context = {
         "title":"Dashboard",
     }
