@@ -28,6 +28,7 @@ def register(request):
     }
     return render(request,"registration/register.html",context = context)
 
+
 # New Whiteboard View
 def create_whiteboard(request):
     if request.method == "POST":

@@ -160,13 +160,8 @@ img {
 .container {
     font-family: 'Josefin Sans', sans-serif;
     color: rgb(247, 243, 231);
+    width: 100%;
     display: inline-block;
-    align-items: center;
-    padding: 50px;
-}
-
-.container p {
-    width:430px;
 }
 
 .container h4 {
@@ -182,5 +177,43 @@ button {
     width:430px;
 }
 
+.container p {
+    width:430px;
+}
 
+.form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding: 30px;
+}
 
+.loginpage h4 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    margin: 1rem;
+    font-size: 20pt;
+    text-align: center;
+}
+
+.login p {
+    width:430px;
+}
+
+.dashboard li {
+    list-style: none;
+    display: inline-block; 
+    height: 42px;
+    padding: 12px; 
+}
+
+.form a {
+    font-weight: bold;
+    width:430px;
+}
+
+.form .button {
+    font-weight: bold;
+    width:430px; 
+}
