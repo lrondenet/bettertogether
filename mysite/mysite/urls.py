@@ -18,9 +18,16 @@ from django.urls import path, include
 from django.conf.urls import url
 from django.conf.urls import include
 
+from django.contrib.auth import views as auth_views
+from myapp.forms import LoginForm
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html', authentication_form=LoginForm)),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('myapp.urls')),
     path('chat/', include('chat.urls')),
+   
 ]

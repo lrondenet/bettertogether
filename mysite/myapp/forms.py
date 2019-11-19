@@ -3,12 +3,14 @@ from django.core.validators import validate_slug
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from django.contrib.auth.forms import AuthenticationForm
+
 # User Registration Form
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Username"}))
     email = forms.EmailField(label = "Email", widget=forms.TextInput(attrs={"placeholder": "Email"}), required=True)
-    password1 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Password"}))
-    password2 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Password Confirmation"}))
+    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={"placeholder": "Password"}))
+    password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={"placeholder": "Password Confirmation"}))
 
     class Meta:
         model = User
@@ -20,6 +22,13 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Username"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password"}))
+    
+
+
 
 # Create Whiteboard Form
 class WhiteboardForm(UserCreationForm):

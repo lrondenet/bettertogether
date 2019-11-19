@@ -1,5 +1,22 @@
 <!-- Page where users are directed after login -->
 
-Dashboard - [Home] [Create Whiteboard] [Profile] [Logout]
-
 <!-- Navigation Bar -->
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+    <nav>
+        <div class="logo">
+            <h4>Dashboard</h4>
+        </div>
+        <div class="dashboard">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Create Whiteboard</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#" class="button">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+{% endblock %}

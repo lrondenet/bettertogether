@@ -3,18 +3,18 @@
 {% block content %}
 <div class="loginpage">
   <form action="/login/" method="post">
-    <h4>Login</h4>
-      {% csrf_token %}
       <div class="login">
+        <h4>Login</h4>
+        {% csrf_token %}
         {{ form.errors }}
-        <h1>{{ form.username.label_tag }}</h1>
-        {{ form.username }}
-        {{ form.password.label_tag }}
-        {{ form.password }}
+        <div class="form">
+          <p>{{ form.username }}</p>
+          <p>{{ form.password }}</p>
+          <input class="button" type="submit" value="Login"/>
+          <a href="/register/" class="button">Register</a>
+          <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+        </div>
       </div>
-      <input type="submit"/>
-        <a href="/register/">Register</a>
-      <input type="hidden" name="next" value="{{ request.GET.next }}" />
       <!-- <button type="button" class="button">Submit</button> -->
   </form>
 </div>
