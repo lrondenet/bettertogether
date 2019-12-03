@@ -12,12 +12,14 @@ def index(request):
     context = {
         "title":"Welcome to WhiteBoard",
     }
+    return render(request,"myapp/index.html", context = context)
+
     # Server side validation of the user
     if request.user.is_authenticated:
         return redirect("/dashboard/")
     # User is not validated on srver side - redirect to login
     else:
-        return render(request,"index.html", context = context)
+        return render(request,"myapp/index.html", context = context)
 
 # Register view
 def register(request):
