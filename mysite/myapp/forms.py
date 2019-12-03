@@ -26,14 +26,11 @@ class RegistrationForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Username"}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password"}))
-    
-
-
 
 # Create Whiteboard Form
 class WhiteboardForm(UserCreationForm):
     subject = forms.CharField(label='Subject', max_length=30)
     # If checked, the whiteboard is open to the public
-    public = forms.BooleanField(initial=True)
+    public = forms.BooleanField()
     if public == True:
         privatekey = forms.IntegerField(label='WhiteboardPassword')

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class WhiteBoard(models.Model):
     subject = models.CharField(max_length=30)
     user = models.ManyToManyField(User)
+    whiteboard_key = models.IntegerField(max_length=5)
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=30)

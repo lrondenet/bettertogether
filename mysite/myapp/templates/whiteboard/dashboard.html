@@ -1,9 +1,13 @@
 <!-- Page where users are directed after login -->
 
+
 <!-- Navigation Bar -->
 {% extends "myapp/base.html" %}
 
+
 {% block content %}
+{% if user.is_authenticated %}
+<!-- Navigation Bar -->
 <body>
     <nav>
         <div class="logo">
@@ -19,4 +23,18 @@
         </div>
     </nav>
 </body>
+
+<!-- Displays Whiteboards Created by User -->
+<div>
+  <span v-if="unseen">
+    <ul>
+      <li v-for="a_board in whiteboards">
+        {% verbatim %}
+        {{ a_board.subject }}
+        {% endverbatim %}
+      </li>
+    </ul>
+  </span>
+</div>
+{% endif %}
 {% endblock %}
