@@ -41,7 +41,7 @@ def create_whiteboard(request):
         if request.method == "POST":
             WF_instance = forms.WhiteboardForm(request.POST)
             if WF_instance.is_valid():
-                new_whiteboard = models.WhiteBoard(subject=WF_instance.cleaned_data["subject"])
+                new_whiteboard = models.WhiteBoard(subject=WF_instance.cleaned_data["subject"],whiteboard_key=WF_instance.cleaned_data["whiteboard_key"])
                 new_whiteboard.user = request.user
                 # Public whiteboard
                 #if new_whiteboard.public == True:
