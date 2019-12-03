@@ -1,0 +1,19 @@
+<!-- Whiteboard Room -->
+
+<!-- Navigation Bar -->
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+    <div style="width: 600px; height: 400px;" id="aww-wrapper">
+    <!-- Element in which the whiteboard will be shown
+              – modify style as needed -->
+    </div>
+    <script src="https://awwapp.com/static/widget/js/aww3.min.js">
+    </script>
+    <script type="text/javascript">
+        var aww = new AwwBoard('#aww-wrapper', {
+        });
+    </script>
+</body>
+{% endblock %}
