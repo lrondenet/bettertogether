@@ -125,6 +125,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# NOTE:
+# this reads the common-static directory so we can share foundation css 
+# between myapp, chat, mysite
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "common-static")
+]
+
 # Django Channels
 # https://channels.readthedocs.io/en/latest/installation.html
 

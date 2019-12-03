@@ -12,7 +12,7 @@ def index(request):
     context = {
         "title":"Welcome to WhiteBoard",
     }
-    return render(request,"index.html", context = context)
+    return render(request,"myapp/index.html", context = context)
 
 # Register view
 def register(request):

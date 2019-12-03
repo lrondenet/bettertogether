@@ -1,13 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
+{% extends "chat/chatbase.html" %}
+
+{% block content %}
+{% load static %}
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
-    <input id="chat-message-submit" type="button" value="Send"/>
+    <div class="row">
+        <div class = "columns">
+            <h4> Chat </h4>
+            <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
+            <div class = "messagenavbar">
+                <input id="chat-message-input" placeholder="Type a message" type="text" size="100" class="messagebox"/><br/>
+                <input id="chat-message-submit" type="button" value="Send" class ="chatbutton"/>
+            </div>
+        </div>
+        <table class="room_grid">
+            <thead>
+                <tr>
+                    <th width="150">In This Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ user }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 <script>
     var roomName = {{ room_name_json }};
@@ -43,4 +60,4 @@
         messageInputDom.value = '';
     };
 </script>
-</html>
+{% endblock %}
