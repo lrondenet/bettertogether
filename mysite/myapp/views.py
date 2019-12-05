@@ -31,36 +31,32 @@ def register(request):
     else:
         RF_instance = forms.RegistrationForm()
     context = {
-        "registration_form":RF_instance,
+        "registration_form":RF_instance
     }
     return render(request,"registration/register.html",context = context)
 
 
 # New Whiteboard View
 def create_whiteboard(request):
-    # Server side validation of the user
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            WF_instance = forms.WhiteboardForm(request.POST)
-            if WF_instance.is_valid():
-                new_whiteboard = models.WhiteBoard(subject=WF_instance.cleaned_data["subject"])
-                new_whiteboard.user = request.user
-                # Public whiteboard
-                #if new_whiteboard.public == True:
-                #    whiteboard_key = models.WhiteBoard(whiteboard_key=WF_instance.cleaned_data["whiteboard_key"])
-                new_whiteboard.save()
-                WF_instance = forms.WhiteboardForm()
-        else:
-            WF_instance = forms.WhiteboardForm()
-        whiteboard_value = models.WhiteBoard.objects.all()
-        context = {
-            "whiteboard_form":WF_instance,
-            "whiteboard_value":whiteboard_value,
-        }
-        return render(request,"whiteboard/whiteboardform.html",context = context)
-    # User is not validated on srver side - redirect to login
+    if request.method == "POST":
+        WF_instance = forms.WhiteboardForm(request.POST)
+        if WF_instance.is_valid():
+            new_whiteboard = models.WhiteBoard(subject=WF_instance.cleaned_data["subject"],whiteboard_key=WF_instance.cleaned_data["whiteboard_key"])
+            new_whiteboard.user = request.user
+            new_whiteboard.save()
+            print("SAVED WHITEBOARD")
+            return render(request,"whiteboard/dashboard.html",context = context)
+            #return redirect("/dashboard/")
+            #WF_instance = forms.WhiteboardForm()
     else:
-        return redirect("/login/")
+        WF_instance = forms.WhiteboardForm()
+    whiteboard_value = models.WhiteBoard.objects.all()
+    context = {
+        "whiteboard_form":WF_instance,
+        "whiteboard_value":whiteboard_value
+    }
+    return render(request,"whiteboard/whiteboardform.html",context = context)
+    #return render(request,"whiteboard/dashboard.html", context = context)
 
 # Whiteboard
 @csrf_exempt
@@ -80,7 +76,7 @@ def whiteboard(request):
 def logout_view(request):
     #logout(request)
     context = {
-        "title":"Logout",
+        "title":"Logout"
     }
     return redirect("/login/")
     #return render(request,"registration/logout.html",context = context)
@@ -94,7 +90,7 @@ def profile(request):
     # Server side validation of the user
     if request.user.is_authenticated:
         context = {
-            "title":"Profile",
+            "title":"Profile"
         }
         return render(request, "profile.html", context = context)
     # User is not validated on srver side - redirect to login
@@ -113,7 +109,7 @@ def dashboard(request):
             for w_q in whiteboard_query:
                 whiteboard_list["whiteboards"] += [{"subject":w_q.subject,"whiteboard_key":w_q.whiteboard_key}]
         context = {
-            "title":"Dashboard",
+            "title":"Dashboard"
         }
         return render(request, "whiteboard/dashboard.html", context = context)
     # User is not validated on srver side - redirect to login

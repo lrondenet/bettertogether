@@ -1,7 +1,4 @@
 <!-- Page where users are directed after login -->
-
-
-<!-- Navigation Bar -->
 {% extends "myapp/base.html" %}
 
 
@@ -28,7 +25,8 @@
 <div>
   <span v-if="unseen">
     <ul>
-      <li v-for="a_board in whiteboards">
+      <li v-for="a_board in whiteboards" class="button">
+        <!-- NOTE: This button needs to link to the corresponsing whiteboard -->
         {% verbatim %}
         {{ a_board.subject }}
         {% endverbatim %}

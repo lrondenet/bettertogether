@@ -31,6 +31,6 @@ class LoginForm(AuthenticationForm):
 class WhiteboardForm(UserCreationForm):
     subject = forms.CharField(label='Subject', max_length=30)
     # If checked, the whiteboard is open to the public
-    public = forms.BooleanField()
-    if public == True:
-        privatekey = forms.IntegerField(label='WhiteboardPassword')
+    #public = forms.BooleanField()
+    #if public == True:
+    whiteboard_key = forms.IntegerField(label='Whiteboard Password')
