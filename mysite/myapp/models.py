@@ -7,6 +7,9 @@ class WhiteBoard(models.Model):
     user = models.ManyToManyField(User)
     whiteboard_key = models.IntegerField()
 
+    def __str__(self):
+        return self.subject
+
 class Profile(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)

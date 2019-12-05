@@ -5,7 +5,7 @@
 
 {% block content %}
 <div>
-  <form class="" action="/" method="post">
+  <form action="/" method="post">
     {% csrf_token %}
     <!-- Displays any errors when user fills out form -->
     {{ whiteboard_form.errors }}
@@ -14,10 +14,10 @@
     <!-- Displays the subject's field -->
     {{ whiteboard_form.subject }}
     <!-- Displays the public/private checkbox label -->
-    {{ whiteboard_form.public.label }}
+    {{ whiteboard_form.whiteboard_key.label }}
     <!-- Displays the public/private checkbox -->
-    {{ whiteboard_form.public }}
-    <button class="button">Create</button>
+    {{ whiteboard_form.whiteboard_key }}
+    <input type="submit" class="button" value="Create">
   </form>
 </div>
 {% endblock %}
