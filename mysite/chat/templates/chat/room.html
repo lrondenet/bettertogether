@@ -1,0 +1,84 @@
+{% extends "chat/chatbase.html" %}
+
+{% block content %}
+{% load static %}
+<body>
+    <div class="row">
+        <div class = "columns">
+            <h4> Chat </h4>
+            <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
+            <div class = "messagenavbar">
+                <input id="chat-message-input" placeholder="Type a message" type="text" size="100" class="messagebox"/><br/>
+                <input id="chat-message-submit" type="button" value="Send" class ="chatbutton"/>
+            </div>
+        </div>
+        <table class="room_grid">
+            <thead>
+                <tr>
+                    <th width="150">In This Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ user }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- START WHITEBOARD -->
+          <div style="width: 600px; height: 400px;" id="aww-wrapper">
+          <!-- Element in which the whiteboard will be shown
+                        – modify style as needed -->
+          </div>
+          <script src="https://awwapp.com/static/widget/js/aww3.min.js">
+          </script>
+          <script type="text/javascript">
+            var aww = new AwwBoard('#aww-wrapper', {
+              apiKey: 'd399bcac-5b89-450d-90df-5efdba370f83',
+              boardLink: 'bettertogether'
+            });
+          </script>
+        <!-- END WHITEBOARD -->
+    </div>
+
+</body>
+<script src="{% static 'reconnecting-websocket.js' %}">
+
+</script>
+
+<script>
+    var roomName = {{ room_name_json }};
+
+    var chatSocket = new ReconnectingWebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        document.querySelector('#chat-log').value += (message + '\n');
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.querySelector('#chat-message-input');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'command': 'new_message'
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+{% endblock %}

@@ -3,9 +3,14 @@ from django.core.validators import validate_slug
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from django.contrib.auth.forms import AuthenticationForm
+
 # User Registration Form
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(label = "Email",required=True)
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Username"}))
+    email = forms.EmailField(label = "Email", widget=forms.TextInput(attrs={"placeholder": "Email"}), required=True)
+    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={"placeholder": "Password"}))
+    password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={"placeholder": "Password Confirmation"}))
 
     class Meta:
         model = User
@@ -17,3 +22,15 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Username"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password"}))
+
+# Create Whiteboard Form
+class WhiteboardForm(UserCreationForm):
+    subject = forms.CharField(label='Subject', max_length=30)
+    # If checked, the whiteboard is open to the public
+    #public = forms.BooleanField()
+    #if public == True:
+    whiteboard_key = forms.IntegerField(label='Whiteboard Password')

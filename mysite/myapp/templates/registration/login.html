@@ -1,0 +1,21 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+<div class="loginpage">
+  <form action="/login/" method="post">
+      <div class="login">
+        <h4>Login</h4>
+        <div class="form">
+          {% csrf_token %}
+          {{ form.errors }}
+          <p>{{ form.username }}</p>
+          <p>{{ form.password }}</p>
+          <input class="button" type="submit" value="Login"/>
+          <a href="/register/" class="button">Register</a>
+          <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+        </div>
+      </div>
+      <!-- <button type="button" class="button">Submit</button> -->
+  </form>
+</div>
+{% endblock %}
