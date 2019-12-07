@@ -1,0 +1,38 @@
+<!-- Page where users are directed after login -->
+{% extends "myapp/base.html" %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<!-- Navigation Bar -->
+<body>
+    <nav>
+        <div class="logo">
+            <h4>Dashboard</h4>
+        </div>
+        <div class="dashboard">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="/newwhiteboard/">Create Whiteboard</a></li>
+                <li><a href="/profile/">Profile</a></li>
+                <li><a href="/logout/" class="button">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+
+<!-- Displays Whiteboards Created by User -->
+<div>
+  <span v-if="unseen">
+    <ul>
+      <li v-for="a_board in whiteboards" class="button">
+        <!-- NOTE: This button needs to link to the corresponsing whiteboard -->
+        {% verbatim %}
+        {{ a_board.subject }}
+        {% endverbatim %}
+      </li>
+    </ul>
+  </span>
+</div>
+{% endif %}
+{% endblock %}
