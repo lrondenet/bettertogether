@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.forms import AuthenticationForm
 
+from .models import WhiteBoard
+
 # User Registration Form
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder": "Username"}))
@@ -28,9 +30,12 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password"}))
 
 # Create Whiteboard Form
-class WhiteboardForm(UserCreationForm):
+class WhiteboardForm(forms.Form):
     subject = forms.CharField(label='Subject', max_length=30)
     # If checked, the whiteboard is open to the public
     #public = forms.BooleanField()
     #if public == True:
     whiteboard_key = forms.IntegerField(label='Whiteboard Password')
+    class Meta:
+        model = WhiteBoard
+        fields = ['subject','whiteboard_key']

@@ -217,3 +217,11 @@ button {
     font-weight: bold;
     width:430px; 
 }
+
+
+
+
+
+.canvas {
+    border: 2px solid black;
+}

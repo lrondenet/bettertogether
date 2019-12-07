@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-User = get_user_model()
+#User = get_user_model()
 
 class Message(models.Model):
     author = models.ForeignKey(User, related_name='author_messages', on_delete=models.CASCADE)

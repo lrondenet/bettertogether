@@ -1,19 +1,28 @@
 <!-- Whiteboard Room -->
 
 <!-- Navigation Bar -->
-{% extends "base.html" %}
+{% extends "myapp/base.html" %}
 
 {% block content %}
-<body>
-    <div style="width: 600px; height: 400px;" id="aww-wrapper">
+<!--body>
+    <div style="width: 600px; height: 400px;" id="aww-wrapper">-->
     <!-- Element in which the whiteboard will be shown
               – modify style as needed -->
-    </div>
+    <!--</div>
     <script src="https://awwapp.com/static/widget/js/aww3.min.js">
     </script>
     <script type="text/javascript">
         var aww = new AwwBoard('#aww-wrapper', {
         });
     </script>
+</body>-->
+<body>
+    <canvas class="canvas"></canvas>
+    <script src="canvas.js"></script>
 </body>
+{% endblock %}
+{% block scripts %}
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="{% static "js/canvas.js" %}"></script>
 {% endblock %}
