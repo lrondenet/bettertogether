@@ -25,31 +25,18 @@
             </tbody>
         </table>
 
-        <!-- START WHITEBOARD -->
-          <div style="width: 600px; height: 400px;" id="aww-wrapper">
-          <!-- Element in which the whiteboard will be shown
-                        – modify style as needed -->
-          </div>
-          <script src="https://awwapp.com/static/widget/js/aww3.min.js">
-          </script>
-          <script type="text/javascript">
-            var aww = new AwwBoard('#aww-wrapper', {
-              apiKey: 'd399bcac-5b89-450d-90df-5efdba370f83',
-              boardLink: 'bettertogether'
-            });
-          </script>
-        <!-- END WHITEBOARD -->
+        <canvas id="#canvas" width="350" height="500"></canvas>
     </div>
 
 </body>
-<script src="{% static 'reconnecting-websocket.js' %}">
+<!-- script src="{% static 'reconnecting-websocket.js' %}"> -->
 
 </script>
 
 <script>
     var roomName = {{ room_name_json }};
 
-    var chatSocket = new ReconnectingWebSocket(
+    var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
 
@@ -74,8 +61,7 @@
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
         chatSocket.send(JSON.stringify({
-            'message': message,
-            'command': 'new_message'
+            'message': message
         }));
 
         messageInputDom.value = '';
