@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-#User = get_user_model()
+User = get_user_model()
 
 class Message(models.Model):
     author = models.ForeignKey(User, related_name='author_messages', on_delete=models.CASCADE)
@@ -12,6 +12,6 @@ class Message(models.Model):
         return self.author.username
 
     # Preloads last 15 messages
-    def last_15_messages(self):
+    #def last_15_messages(self):
         # Returns last 15 Message objects in reverse order (most recent timestamps first)
-        return Message.objects.order_by('-timestamp').all()[:15]
+    #    return Message.objects.order_by('-timestamp').all()[:15]

@@ -12,7 +12,17 @@
                 <input id="chat-message-submit" type="button" value="Send" class ="chatbutton"/>
             </div>
         </div>
-        <table class="room_grid">
+        <div class="whiteboard">
+            <div class="toolbar">
+                <div class="radius">
+                    <div class="decres"></div>
+                    <div classs="incres"></div>
+                </div>
+            </div>
+            <canvas class="canvas"></canvas>
+            <script src="{% static "js/canvas.js" %}"></script>
+        </div>
+        <!--<table class="room_grid">
             <thead>
                 <tr>
                     <th width="150">In This Room</th>
@@ -23,24 +33,8 @@
                     <td>{{ user }}</td>
                 </tr>
             </tbody>
-        </table>
-
-        <!-- START WHITEBOARD -->
-          <div style="width: 600px; height: 400px;" id="aww-wrapper">
-          <!-- Element in which the whiteboard will be shown
-                        – modify style as needed -->
-          </div>
-          <script src="https://awwapp.com/static/widget/js/aww3.min.js">
-          </script>
-          <script type="text/javascript">
-            var aww = new AwwBoard('#aww-wrapper', {
-              apiKey: 'd399bcac-5b89-450d-90df-5efdba370f83',
-              boardLink: 'bettertogether'
-            });
-          </script>
-        <!-- END WHITEBOARD -->
+        </table>-->
     </div>
-
 </body>
 <script src="{% static 'reconnecting-websocket.js' %}">
 
@@ -81,4 +75,8 @@
         messageInputDom.value = '';
     };
 </script>
+{% endblock %}
+{% block scripts %}
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 {% endblock %}
