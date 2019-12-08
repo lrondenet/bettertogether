@@ -54,7 +54,7 @@ def submit(request):
         #print("Valid")
         whiteboard = models.WhiteBoard(subject=WF_instance.cleaned_data["subject"],
         whiteboard_key=WF_instance.cleaned_data["whiteboard_key"])
-        whiteboard.user = request.user
+        #whiteboard.user = request.user
         whiteboard.save()
         #WF_instance = forms.WhiteboardForm()
     return redirect('dashboard/')
