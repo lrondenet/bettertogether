@@ -23,9 +23,10 @@ def index(request):
 
 # Register view
 def register(request):
+    profile_instance = models.Profile.objects.all()
     if request.method == "POST":
         RF_instance = forms.RegistrationForm(request.POST)
-        profile_instance = models.Profile.objects.all()
+        #profile_instance = models.Profile.objects.all()
         if RF_instance.is_valid():
             profile_instance = models.Profile(first_name=RF_instance.cleaned_data["first_name"],
             last_name=RF_instance.cleaned_data["last_name"],
