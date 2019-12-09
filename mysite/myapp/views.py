@@ -25,13 +25,19 @@ def index(request):
 def register(request):
     if request.method == "POST":
         RF_instance = forms.RegistrationForm(request.POST)
+        profile_instance = models.Profile.objects.all()
         if RF_instance.is_valid():
+            profile_instance = models.Profile(first_name=RF_instance.cleaned_data["first_name"],
+            last_name=RF_instance.cleaned_data["last_name"],
+            username=RF_instance.cleaned_data["username"],
+            email=RF_instance.cleaned_data["email"])
             RF_instance.save()
             return redirect("/login/")
     else:
         RF_instance = forms.RegistrationForm()
     context = {
-        "registration_form":RF_instance
+        "registration_form":RF_instance,
+        "profile":profile_instance,
     }
     return render(request,"registration/register.html", context = context)
 
@@ -54,7 +60,7 @@ def submit(request):
         #print("Valid")
         whiteboard = models.WhiteBoard(subject=WF_instance.cleaned_data["subject"],
         whiteboard_key=WF_instance.cleaned_data["whiteboard_key"])
-        whiteboard.user = request.user
+        #whiteboard.user = request.user
         whiteboard.save()
         #WF_instance = forms.WhiteboardForm()
     return redirect('dashboard/')
