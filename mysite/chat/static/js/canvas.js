@@ -2,9 +2,6 @@
 // Doesn't actually print out the output
 
 window.addEventListener("load", () => {
-    var boardSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');
 
     // Gets the canvas
     const canvas = document.getElementById("canvas");
@@ -26,11 +23,7 @@ window.addEventListener("load", () => {
     function startDrawing(e){
       drawing = true;
       draw(e);
-      // Tell other users to start drawing
-      document.querySelector('#canvas').focus();
-      document.querySelector('#canvas').onkeyup = function(e) {
-        document.querySelector('#canvas').click();
-        };
+
       //console.log("start drawing");
     }
   
@@ -63,9 +56,8 @@ window.addEventListener("load", () => {
       end.y = e.clientY;
  
       // Tell other users to start drawing
-      boardSocket.send(JSON.stringify({
-        'command': 'draw'
-        }))
+      boardSocket.send('draw')
+      console.log('command -> draw')
     }
   
     // Listen for a mouse click & release
@@ -74,11 +66,6 @@ window.addEventListener("load", () => {
     canvas.addEventListener("mousemove", draw);
 
     /* ========= Chat Function ========= */
-    //var roomName = {{ room_name_json }};
-
-    /*var boardSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');*/
 
     boardSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
