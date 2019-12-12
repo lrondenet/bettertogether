@@ -20,7 +20,4 @@ class Profile(models.Model):
     image = models.ImageField(blank=True)
     bio = models.TextField(max_length=500,blank=True)
 
-    def __str__(self):
-        return self.first_name
-
 

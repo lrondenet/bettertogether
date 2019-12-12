@@ -13,6 +13,7 @@ def index(request):
        "title":"Welcome to WhiteBoard",
     }
     return render(request,"myapp/index.html", context = context)
+
     # Server side validation of the user
     if request.user.is_authenticated:
         return redirect("/dashboard/")
@@ -22,27 +23,24 @@ def index(request):
 
 # Register view
 def register(request):
-    #profile_instance = models.Profile.objects.all()
+    profile_instance = models.Profile.objects.all()
     if request.method == "POST":
         RF_instance = forms.RegistrationForm(request.POST)
         #profile_instance = models.Profile.objects.all()
         if RF_instance.is_valid():
-           #profile_instance = models.Profile(first_name=RF_instance.cleaned_data["first_name"],
-           #last_name=RF_instance.cleaned_data["last_name"],
-           #username=RF_instance.cleaned_data["username"],
-           #email=RF_instance.cleaned_data["email"])
-           RF_instance.save()
-           return redirect("/login/")
+            profile_instance = models.Profile(first_name=RF_instance.cleaned_data["first_name"],
+            last_name=RF_instance.cleaned_data["last_name"],
+            username=RF_instance.cleaned_data["username"],
+            email=RF_instance.cleaned_data["email"])
+            RF_instance.save()
+            return redirect("/login/")
     else:
         RF_instance = forms.RegistrationForm()
     context = {
         "registration_form":RF_instance,
-        #"profile":profile_instance,
+        "profile":profile_instance,
     }
     return render(request,"registration/register.html", context = context)
-
-
-
 
 
 @csrf_exempt
@@ -86,7 +84,7 @@ def whiteboard(request):
     # Server side validation of the user
     if request.user.is_authenticated:
         context = {
-            "title":"Whiteboard",
+            "title":"Whiteboard", 
         }
         return render(request,"whiteboard/whiteboard.html", context = context)
     # User is not validated on srver side - redirect to login
@@ -110,12 +108,10 @@ def logout_view(request):
 @csrf_exempt
 @login_required(login_url='/login/')
 def profile(request):
-    #profile_user = models.Profile.objects.all()
     # Server side validation of the user
     if request.user.is_authenticated:
         context = {
-            "title":"Profile",
-            #"profile":profile_user,
+            "title":"Profile"
         }
         return render(request, "profile.html", context = context)
     # User is not validated on srver side - redirect to login

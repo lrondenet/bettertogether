@@ -4,7 +4,6 @@
 {% extends "myapp/base.html" %}
 
 {% block content %}
-{% load static %}
 <!--body>
     <div style="width: 600px; height: 400px;" id="aww-wrapper">-->
     <!-- Element in which the whiteboard will be shown
@@ -19,11 +18,11 @@
 </body>-->
 <body>
     <canvas class="canvas"></canvas>
-    <script src="{% static "js/canvas.js" %}"></script>
+    <script src="canvas.js"></script>
 </body>
 {% endblock %}
 {% block scripts %}
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<!--<script src="{% static "js/canvas.js" %}"></script> -->
+<script src="{% static "js/canvas.js" %}"></script>
 {% endblock %}

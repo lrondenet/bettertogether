@@ -12,6 +12,6 @@ class Message(models.Model):
         return self.author.username
 
     # Preloads last 15 messages
-    #def last_15_messages(self):
+    def last_15_messages(self):
         # Returns last 15 Message objects in reverse order (most recent timestamps first)
-    #    return Message.objects.order_by('-timestamp').all()[:15]
+        return Message.objects.order_by('-timestamp').all()[:15]
