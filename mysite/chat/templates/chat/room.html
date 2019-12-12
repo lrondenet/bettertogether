@@ -1,6 +1,5 @@
 {% extends "chat/chatbase.html" %}
 
-{% extends "chat/chatbase.html" %}
 {% load staticfiles %}
 {% static "channels/js/websocketbridge.js" %}
 {% block content %}
@@ -27,7 +26,6 @@
                 </tr>
             </tbody>
         </table>
-
         <canvas class="canvas" id="canvas"></canvas>
         <script src="{% static "js/canvas.js" %}"></script>
     </div>
@@ -45,9 +43,10 @@
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
-        var user = data['user']
-        console.log("user: " + user)
-       
+      
+        var user = data['user'];
+        console.log("user: " + user);
+
         document.querySelector('#chat-log').value += (user + ': ' + message + '\n');
     };
 
