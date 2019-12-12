@@ -13,7 +13,6 @@ def index(request):
        "title":"Welcome to WhiteBoard",
     }
     return render(request,"myapp/index.html", context = context)
-
     # Server side validation of the user
     if request.user.is_authenticated:
         return redirect("/dashboard/")
