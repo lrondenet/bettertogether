@@ -84,7 +84,7 @@ def whiteboard(request):
     # Server side validation of the user
     if request.user.is_authenticated:
         context = {
-            "title":"Whiteboard",
+            "title":"Whiteboard", 
         }
         return render(request,"whiteboard/whiteboard.html", context = context)
     # User is not validated on srver side - redirect to login
