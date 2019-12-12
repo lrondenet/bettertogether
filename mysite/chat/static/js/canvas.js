@@ -4,14 +4,15 @@
 window.addEventListener("load", () => {
 
     // Gets the canvas
-    const canvas = document.getElementById("canvas");
+    const canvas = document.querySelector(".canvas");
     // Defines what context were working in
     const ctx = canvas.getContext("2d");
+ 
 
     // Holds start & end positions
     var start = {};
     var end = {};
-  
+
     // Programmatically resizes to the window
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
@@ -23,17 +24,22 @@ window.addEventListener("load", () => {
     function startDrawing(e){
       drawing = true;
       draw(e);
-
       //console.log("start drawing");
+
     }
   
     // Stop drawing
     function endDrawing(){
       drawing = false;
-      var startPos = ctx.beginPath();
+
+      ctx.beginPath();
+      console.log("stop drawing");
+
+      // var startPos = ctx.beginPath();
       // Tell other users to start drawing
-      document.querySelector('#canvas').focus();
+      //document.querySelector('#canvas').focus();
       //console.log("stop drawing");
+
     }
   
     function draw(e){
@@ -46,14 +52,20 @@ window.addEventListener("load", () => {
   
       // Start moving the position
       ctx.lineTo(e.clientX,e.clientY);
-      start.x = e.clientX;
-      start.y = e.clientY;
 
       ctx.stroke();
       ctx.beginPath();
       ctx.moveTo(e.clientX,e.clientY);
-      end.x = e.clientX;
-      end.y = e.clientY;
+      console.log("drawing.....");
+
+      //start.x = e.clientX;
+      //start.y = e.clientY;
+
+      //ctx.stroke();
+      //ctx.beginPath();
+      //ctx.moveTo(e.clientX,e.clientY);
+      //end.x = e.clientX;
+      //end.y = e.clientY;
  
       // Tell other users to start drawing
       boardSocket.send('draw')
@@ -65,36 +77,39 @@ window.addEventListener("load", () => {
     canvas.addEventListener("mouseup", endDrawing);
     canvas.addEventListener("mousemove", draw);
 
+  });
+
     /* ========= Chat Function ========= */
 
-    boardSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var command = data['command'];
-        console.log("command: " + command);
-       
-        document.querySelector('#canvas').value += (command);
-    };
+    //boardSocket.onmessage = function(e) {
+//        var data = JSON.parse(e.data);
+//        var command = data['command'];
+//        console.log("command: " + command);
+//       
+//        document.querySelector('#canvas').value += (command);
+//    };
 
-    boardSocket.onclose = function(e) {
-        console.error('Chat for canvas socket closed unexpectedly');
-    };
+//    boardSocket.onclose = function(e) {
+//        console.error('Chat for canvas socket closed unexpectedly');
+//    };
 
-    document.querySelector('#canvas').focus();
-    document.querySelector('#canvas').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#canvas').onmessage();
-        }
-    };
+//    document.querySelector('#canvas').focus();
+//    document.querySelector('#canvas').onkeyup = function(e) {
+//        if (e.keyCode === 13) {  // enter, return
+//            document.querySelector('#canvas').onmessage();
+//        }
+//    };
 
-    document.querySelector('#canvas').onclick = function(e) {
+//    document.querySelector('#canvas').onclick = function(e) {
         // Listen for a mouse click & release
-        var messageInputDom = document.querySelector('canvas');
-        var command = messageInputDom.value;
-        console.log("Message Input DOM: " + JSON.stringify(command));
-        boardSocket.send(JSON.stringify({
-            'command': command
-        }));
+//        var messageInputDom = document.querySelector('canvas');
+//       var command = messageInputDom.value;
+//        console.log("Message Input DOM: " + JSON.stringify(command));
+//        boardSocket.send(JSON.stringify({
+//            'command': command
+//        }));
 
-        messageInputDom.value = '';
-    };
-});
+//        messageInputDom.value = '';
+//    };
+//});
+
