@@ -33,6 +33,30 @@
 </body>
 <!--<script src="{% static 'reconnecting-websocket.js' %}"></script>-->
 
+<!-- --------- CANVAS WHITEBOARD SCRIPT --------- -->
+<script>
+    /* -------- Canvas Websockets --------- */
+    var roomName = {{ room_name_json }};
+
+    var boardSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+
+    document.querySelector('#canvas').focus();
+    boardSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var command = data['command'];
+        console.log("command: " + command)
+
+        // Invoke command function
+    }
+
+    boardSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+</script>
+
+<!-- --------- CHAT ROOM SCRIPT --------- -->
 <script>
     var roomName = {{ room_name_json }};
 

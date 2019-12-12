@@ -24,14 +24,6 @@ window.addEventListener("load", () => {
     function startDrawing(e){
       drawing = true;
       draw(e);
-
-      console.log("start drawing");
-
-      // Tell other users to start drawing
-      //document.querySelector('#canvas').focus();
-      //document.querySelector('#canvas').onkeyup = function(e) {
-       // document.querySelector('#canvas').click();
-       // };
       //console.log("start drawing");
 
     }
@@ -76,10 +68,8 @@ window.addEventListener("load", () => {
       //end.y = e.clientY;
  
       // Tell other users to start drawing
-      //boardSocket.send(JSON.stringify({
-      //  'command': 'draw'
-       // }))
-
+      boardSocket.send('draw')
+      console.log('command -> draw')
     }
   
     // Listen for a mouse click & release
@@ -89,16 +79,7 @@ window.addEventListener("load", () => {
 
   });
 
-
-
-
-
     /* ========= Chat Function ========= */
-    //var roomName = {{ room_name_json }};
-
-    /*var boardSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');*/
 
     //boardSocket.onmessage = function(e) {
 //        var data = JSON.parse(e.data);
