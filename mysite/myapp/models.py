@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
 # White board
 class WhiteBoard(models.Model):
     subject = models.CharField(max_length=30)
@@ -16,4 +18,6 @@ class Profile(models.Model):
     email = models.CharField(max_length=30)
     username = models.CharField(max_length=30)
     image = models.ImageField(blank=True)
-    bio = models.CharField(max_length=500,blank=True)
+    bio = models.TextField(max_length=500,blank=True)
+
+
