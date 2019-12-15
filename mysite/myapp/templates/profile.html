@@ -1,15 +1,16 @@
 {% extends "myapp/base.html" %}
 
 {% block content %}
-<div class="container">
-    <h1>Profile Page</h1>
-    <p>Username: {{ user }} </p>
-    <p>Firstname: {{ user.first_name }}</p>
-    <p>Lastname: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>picture: </p>
-    <p>bio: </p>
-
+<div class="profilecontainer">
+    <div class="profilebox">
+        <h1>Profile Page</h1>
+        <p>Username: {{ user }} </p>
+        <p>Firstname: {{ user.first_name }}</p>
+        <p>Lastname: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>picture: {{ profile.first_name }}</p>
+        <p>bio: </p>
+    <div>
 </div>
 
 {% endblock %}

@@ -26,13 +26,13 @@ def register(request):
     profile_instance = models.Profile.objects.all()
     if request.method == "POST":
         RF_instance = forms.RegistrationForm(request.POST)
-        #profile_instance = models.Profile.objects.all()
         if RF_instance.is_valid():
             profile_instance = models.Profile(first_name=RF_instance.cleaned_data["first_name"],
             last_name=RF_instance.cleaned_data["last_name"],
             username=RF_instance.cleaned_data["username"],
             email=RF_instance.cleaned_data["email"])
             RF_instance.save()
+            profile_instance.save()
             return redirect("/login/")
     else:
         RF_instance = forms.RegistrationForm()
@@ -109,9 +109,11 @@ def logout_view(request):
 @login_required(login_url='/login/')
 def profile(request):
     # Server side validation of the user
+    profile_instance = models.Profile.objects.all()
     if request.user.is_authenticated:
         context = {
-            "title":"Profile"
+            "title":"Profile",
+            "profile": profile_instance
         }
         return render(request, "profile.html", context = context)
     # User is not validated on srver side - redirect to login
