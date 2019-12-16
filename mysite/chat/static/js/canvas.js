@@ -2,7 +2,6 @@
 // Doesn't actually print out the output
 
 window.addEventListener("load", () => {
-
     // Gets the canvas
     const canvas = document.querySelector("#canvas");
     // Defines what context were working in
@@ -11,6 +10,7 @@ window.addEventListener("load", () => {
     // Holds start & end positions
     var start = {};
     var end = {};
+    var plots = [];
 
     // Tracks currently executing function
     var current_function = '';
@@ -29,7 +29,6 @@ window.addEventListener("load", () => {
       current_function = "startDrawing";
       //Handling the click event
       console.log("coordinate-start sent: " + JSON.stringify(start))
-      boardSocket.send(JSON.stringify(start));
       //console.log("command -> startDrawing");
     }
   
@@ -40,8 +39,11 @@ window.addEventListener("load", () => {
       current_function = "endDrawing";
       //Handling the click event
       console.log("coordinate-end sent: " + JSON.stringify(start))
-      boardSocket.send(JSON.stringify(start));
       //console.log("command -> endDrawing");
+      console.log("coordinates sent: " + JSON.stringify(plots))
+      /*boardSocket.send(JSON.stringify({
+        'coordinates': coords
+      }));*/
     }
   
     function draw(e){
@@ -57,21 +59,23 @@ window.addEventListener("load", () => {
       // Record starting coordinates
       start.x = e.clientX;
       start.y = e.clientY;
+      storeCoordinate(start.x, start.y, plots);
       //console.log("start: " + JSON.stringify(start))
 
       ctx.stroke();
       ctx.beginPath();
       ctx.moveTo(e.clientX,e.clientY);
+      storeCoordinate(e.clientX,e.clientY, plots);
 
       // Record end coordinates
       end.x = e.clientX;
       end.y = e.clientY;
+      storeCoordinate(end.x, end.y, plots);
+  
  
       // Tell other users to start drawing
       current_function = "draw";
       //Handling the click event
-      console.log("coordinates sent: " + JSON.stringify(start))
-      boardSocket.send(JSON.stringify(start));
       //console.log('command -> draw')
     }
   
@@ -80,39 +84,55 @@ window.addEventListener("load", () => {
     canvas.addEventListener("mouseup", endDrawing);
     canvas.addEventListener("mousemove", draw);
 
-  });
+    function storeCoordinate(xVal, yVal, array) {
+      array.push({x: xVal, y: yVal});
+    }
 
-    /* ========= Chat Function ========= */
+    /* PUBNUB MULTIUSER CHAT API */
+    var channel = 'my-draw-demo';
 
-    //boardSocket.onmessage = function(e) {
-//        var data = JSON.parse(e.data);
-//        var command = data['command'];
-//        console.log("command: " + command);
-//       
-//        document.querySelector('#canvas').value += (command);
-//    };
+    var pubnub = PUBNUB.init({
+    //var pubnub = new PubNub({
+      publish_key: "pub-c-e77bd0c0-5551-48fd-900b-0528b548d2a3",
+      subscribe_key: "sub-c-f3c4a864-170f-11ea-a1d5-ea5a03b00545",
+      ssl: true
+    });
 
-//    boardSocket.onclose = function(e) {
-//        console.error('Chat for canvas socket closed unexpectedly');
-//    };
+    pubnub.publish({
+      'channel': channel,
+      'message': { 
+        'plots': plots // your array goes here
+      } 
+    });
 
-//    document.querySelector('#canvas').focus();
-//    document.querySelector('#canvas').onkeyup = function(e) {
-//        if (e.keyCode === 13) {  // enter, return
-//            document.querySelector('#canvas').onmessage();
-//        }
-//    };
+    pubnub.subscribe({
+      channel: channel,
+      callback: drawFromStream,
 
-//    document.querySelector('#canvas').onclick = function(e) {
-        // Listen for a mouse click & release
-//        var messageInputDom = document.querySelector('canvas');
-//       var command = messageInputDom.value;
-//        console.log("Message Input DOM: " + JSON.stringify(command));
-//        boardSocket.send(JSON.stringify({
-//            'command': command
-//        }));
+      // Add presence
+      presence: function(m){
+        var element = document.getElementById('occupancy');
+        if(element){
+          element.textContent = m.occupancy;
+        }
+      }
+    });
 
-//        messageInputDom.value = '';
-//    };
-//});
+    function drawOnCanvas(color, plots) {
+      ctx.beginPath();
+      ctx.moveTo(plots[0].x, plots[0].y);
+    
+      for(var i=1; i<plots.length; i++) {
+        ctx.lineTo(plots[i].x, plots[i].y);
+      }
+      ctx.stroke();
+    }
 
+    function drawFromStream(message) {
+      if(!message) return;        
+  
+      ctx.beginPath();
+      drawOnCanvas(message.plots);
+    }
+    /* END PUBNUB MULTIUSER CHAT API */
+});

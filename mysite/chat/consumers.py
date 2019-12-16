@@ -86,6 +86,7 @@ class BoardConsumer(AsyncWebsocketConsumer):
         # The usernames
         self.user = self.scope['user']
         user = '%s' % self.user
+        print("CANVAS RECEIVED COORDINATES FROM SOCKET\n")
 
         # Send message to room group
         await self.channel_layer.group_send(

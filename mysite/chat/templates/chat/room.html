@@ -31,6 +31,8 @@
                 </tr>
             </tbody>
         </table>
+        <script src="https://cdn.pubnub.com/pubnub-3.15.2.min.js"></script>
+        <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
         <script src="{% static "js/canvas.js" %}"></script>
         <canvas id="canvas" class="canvas"></canvas>
     </div>
@@ -38,41 +40,36 @@
 </body>
 <!--<script src="{% static 'reconnecting-websocket.js' %}"></script>-->
 
-<!-- --------- CANVAS WHITEBOARD SCRIPT --------- -->
+<!-- --------- CANVAS WHITEBOARD SCRIPT --------- 
 <script>
     /* -------- Canvas Websockets --------- */
     var roomName = {{ room_name_json }};
 
+    // Create new socket for the canvas
     var boardSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
+    
+    // Check if socket is open
+    boardSocket.onopen = function(e) {
+        console.log("Board Socket is open now.");
+    }
 
     //document.querySelector('#canvas').focus();
-    /*boardSocket.onmessage = function(e) {
+    boardSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var coordinates = data['coordinates'];
         var user = data['user'];
-        console.log(user + " onmessage command: " + coordinates + "\n")
+        console.log(user + " coordinates received: " + JSON.stringify(coordinates))
 
         // Invoke command function
-    }*/
+    }
 
     boardSocket.onclose = function(e) {
         console.error('Canvas socket closed unexpectedly\n');
     };
-
-    /*document.querySelector('#canvas').onclick = function(e) {
-        var messageInputDom = document.querySelector('#canvas');
-        var command = messageInputDom.value;
-        console.log("debug command: " + command + "\n")
-        boardSocket.send(JSON.stringify({
-            'command': command
-        }));
-
-        messageInputDom.value = '';
-    };*/
 </script>
-<!-- --------- END CANVAS WHITEBOARD SCRIPT --------- -->
+ --------- END CANVAS WHITEBOARD SCRIPT --------- -->
 
 <!-- --------- CHAT ROOM SCRIPT --------- -->
 <script>
@@ -82,9 +79,10 @@
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
     
-    var boardSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');
+    // Check if socket is open
+    chatSocket.onopen = function(e) {
+        console.log("Chat Socket is open now.");
+    }
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
@@ -95,14 +93,6 @@
         document.querySelector('#chat-log').value += (user + ': ' + message + '\n');
     };
 
-    boardSocket.onopen = function(e) {
-        var data = JSON.parse(e.data);
-        var coordinates = data['coordinates'];
-        var user = data['user'];
-        console.log(user + " onmessage command: " + coordinates + "\n")
-
-        // Invoke command function
-    }
 
     chatSocket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');

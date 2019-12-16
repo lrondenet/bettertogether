@@ -8,6 +8,7 @@ from . import consumers
 
 websocket_urlpatterns = [
     re_path(r'ws/chat/(?P<room_name>\w+)/$', consumers.ChatConsumer),
+    re_path(r'ws/chat/(?P<room_name>\w+)/$', consumers.BoardConsumer),
 ]
 
 application = ProtocolTypeRouter({
@@ -15,6 +16,7 @@ application = ProtocolTypeRouter({
     "websocket": AuthMiddlewareStack(
         URLRouter([
             url(r'ws/chat/(?P<room_name>\w+)/$', consumers.ChatConsumer),
+            url(r'ws/chat/(?P<room_name>\w+)/$', consumers.BoardConsumer),
         ])
     ),
 

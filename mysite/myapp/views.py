@@ -23,7 +23,7 @@ def index(request):
 
 # Register view
 def register(request):
-    profile_instance = models.Profile.objects.all()
+    #profile_instance = models.Profile.objects.all()
     if request.method == "POST":
         RF_instance = forms.RegistrationForm(request.POST)
         if RF_instance.is_valid():
@@ -38,7 +38,7 @@ def register(request):
         RF_instance = forms.RegistrationForm()
     context = {
         "registration_form":RF_instance,
-        "profile":profile_instance,
+        #"profile":profile_instance,
     }
     return render(request,"registration/register.html", context = context)
 
