@@ -1,6 +1,5 @@
 {% extends "chat/chatbase.html" %}
 
-{% extends "chat/chatbase.html" %}
 {% load staticfiles %}
 {% static "channels/js/websocketbridge.js" %}
 {% block content %}
@@ -15,7 +14,7 @@
                 <input id="chat-message-submit" type="button" value="Send" class ="chatbutton"/>
             </div>
         </div>
-        <table class="room_grid">
+        <!--<table class="room_grid">
             <thead>
                 <tr>
                     <th width="150">In This Room</th>
@@ -26,7 +25,7 @@
                     <td>{{ user }}</td>
                 </tr>
             </tbody>
-        </table>
+        </table>-->
 
         <canvas class="canvas" id="canvas"></canvas>
         <script src="{% static "js/canvas.js" %}"></script>

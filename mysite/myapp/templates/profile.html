@@ -3,13 +3,15 @@
 {% block content %}
 <div class="container">
     <h1>Profile Page</h1>
-    <p>Username: {{ user }} </p>
-    <p>Firstname: {{ user.first_name }}</p>
-    <p>Lastname: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>picture: </p>
-    <p>bio: </p>
-
+    <div class="profilebox">
+        <img class="rounded-circle" src="{{ user.profile.image.url }}">
+        <p>Username: {{ user.username }} </p>
+        <p>Firstname: {{ user.first_name }}</p>
+        <p>Lastname: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <div class="profilebutton">
+            <a href="/dashboard/" class="button">Go Back</a>
+        </div>
+    </div>
 </div>
-
 {% endblock %}
