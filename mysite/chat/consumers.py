@@ -79,25 +79,37 @@ class BoardConsumer(AsyncWebsocketConsumer):
     
     # Receive message from WebSocket
     async def receive(self, text_data):
+        # The command
         text_data_json = json.loads(text_data)
-        command = text_data_json['command']
+        coordinates = text_data_json['coordinates']
+
+        # The usernames
+        self.user = self.scope['user']
+        user = '%s' % self.user
 
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,
             {
-                'type': 'current_command',
-                'command': command
+                'type': 'chat_message',
+                'coordinates': coordinates,
+                'user': user
             }
         )
     
     # Receive message from room group
-    async def current_command(self, event):
-        command = event['command']
+    async def chat_message(self, event):
+        coordinates = event['coordinates']
+        user = event['user']
+        print("user: ")
+        print(user)
+        print("coordinates: ")
+        print(coordinates)
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
-            'command': command
+            'coordinates': coordinates,
+            'user': user
         }))
 
 

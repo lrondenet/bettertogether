@@ -1,5 +1,10 @@
 {% extends "chat/chatbase.html" %}
 
+<!-- VERSION NOTES: 
+    1. In order for starting coordinates to send, user must enter something into chat first
+    2. Doesn't send over web sockets
+-->
+
 {% load staticfiles %}
 {% static "channels/js/websocketbridge.js" %}
 {% block content %}
@@ -25,14 +30,10 @@
                     <td>{{ user }}</td>
                 </tr>
             </tbody>
-<<<<<<< HEAD
-        </table>-->
 
-=======
-        </table>
->>>>>>> 6c636cf4337c54adc0947553fe44bef3cab63d01
-        <canvas class="canvas" id="canvas"></canvas>
+        </table>-->
         <script src="{% static "js/canvas.js" %}"></script>
+        <canvas id="canvas" class="canvas"></canvas>
     </div>
 
 </body>
@@ -47,19 +48,32 @@
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
 
-    document.querySelector('#canvas').focus();
-    boardSocket.onmessage = function(e) {
+    //document.querySelector('#canvas').focus();
+    /*boardSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
-        var command = data['command'];
-        console.log("command: " + command)
+        var coordinates = data['coordinates'];
+        var user = data['user'];
+        console.log(user + " onmessage command: " + coordinates + "\n")
 
         // Invoke command function
-    }
+    }*/
 
     boardSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
+        console.error('Canvas socket closed unexpectedly\n');
     };
+
+    /*document.querySelector('#canvas').onclick = function(e) {
+        var messageInputDom = document.querySelector('#canvas');
+        var command = messageInputDom.value;
+        console.log("debug command: " + command + "\n")
+        boardSocket.send(JSON.stringify({
+            'command': command
+        }));
+
+        messageInputDom.value = '';
+    };*/
 </script>
+<!-- --------- END CANVAS WHITEBOARD SCRIPT --------- -->
 
 <!-- --------- CHAT ROOM SCRIPT --------- -->
 <script>
@@ -68,16 +82,28 @@
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
+    
+    var boardSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
-      
         var user = data['user'];
-        console.log("user: " + user);
+        console.log(user + ": " + message + "\n");
 
         document.querySelector('#chat-log').value += (user + ': ' + message + '\n');
     };
+
+    boardSocket.onopen = function(e) {
+        var data = JSON.parse(e.data);
+        var coordinates = data['coordinates'];
+        var user = data['user'];
+        console.log(user + " onmessage command: " + coordinates + "\n")
+
+        // Invoke command function
+    }
 
     chatSocket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');
@@ -100,6 +126,7 @@
         messageInputDom.value = '';
     };
 </script>
+<!-- --------- END CHAT ROOM SCRIPT --------- -->
 {% endblock %}
 
 {% block scripts %}
